@@ -1,11 +1,13 @@
 package ke.co.neverest.animations
 
+import android.graphics.drawable.AnimationDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity(),Animation.AnimationListener {
@@ -14,6 +16,10 @@ class MainActivity : AppCompatActivity(),Animation.AnimationListener {
     lateinit var txtMessage:TextView
     lateinit var btn: Button
     lateinit var animFadein: Animation
+
+
+
+    private lateinit var animateImg: AnimationDrawable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +43,12 @@ class MainActivity : AppCompatActivity(),Animation.AnimationListener {
             txtMessage.startAnimation(animFadein)
         }
 
+        val rocketImage = findViewById<ImageView>(R.id.first_image).apply {
+            setBackgroundResource(R.drawable.image_display)
+            animateImg = background as AnimationDrawable
+        }
 
+        rocketImage.setOnClickListener({ animFadein.start() })
     }
 
     override fun onAnimationRepeat(p0: Animation?) {
